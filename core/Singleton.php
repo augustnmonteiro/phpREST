@@ -3,33 +3,33 @@
 class Singleton
 {
 
-    private $auth, $model, $error;
+    private static $auth, $model, $error;
 
     public static function Auth()
     {
-        if (empty($auth)) {
-            $auth = new Auth();
+        if (static::$auth === null) {
+            static::$auth = new Auth();
         }
 
-        return $auth;
+        return static::$auth;
     }
 
     public static function Model()
     {
-        if (empty($model)) {
-            $model = new Model();
+        if (static::$model === null) {
+            static::$model = new Model();
         }
 
-        return $model;
+        return static::$model;
     }
 
     public static function Error()
     {
-        if (empty($error)) {
-            $error = new Error();
+        if (static::$error === null) {
+            static::$error = new Error();
         }
 
-        return $error;
+        return static::$error;
     }
 }
 
