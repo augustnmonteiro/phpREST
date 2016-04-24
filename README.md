@@ -8,9 +8,6 @@ My old phpREST framework :)
 CREATE SCHEMA IF NOT EXISTS `todo` DEFAULT CHARACTER SET utf8 ;
 USE `todo` ;
 
--- -----------------------------------------------------
--- Table `todo`.`todo`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `todo`.`todo` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `description` LONGTEXT NULL DEFAULT NULL,
