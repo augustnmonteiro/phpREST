@@ -39,7 +39,17 @@ class Model
     function getById($table, $id, $projection)
     {
         $projection = $this->getProjection($projection);
-        return $this->query("SELECT $projection FROM $table WHERE id='$id'");
+        $sql = $this->mysql->query("SELECT $projection FROM $table WHERE id='$id' LIMIT 1");
+        if ($sql) {
+            $result = $sql->fetch_all(MYSQL_ASSOC);
+            if (count($result) > 0) {
+                return $result[0];
+            } else {
+                return (object) [];
+            }
+        }
+        Singleton::Error()->show(412, 'getById | ' . $this->mysql->error);
+        return false;
     }
 
     function query($query)
