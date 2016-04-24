@@ -2,6 +2,32 @@
 
 My old phpREST framework :)
 
+# Creating a TODO APP
+1. Create your table
+```sql
+CREATE SCHEMA IF NOT EXISTS `todo` DEFAULT CHARACTER SET utf8 ;
+USE `todo` ;
+
+CREATE TABLE IF NOT EXISTS `todo`.`todo` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `description` LONGTEXT NULL DEFAULT NULL,
+  `status` INT(1) NULL DEFAULT '0',
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 8
+DEFAULT CHARACTER SET = utf8;
+```
+2. Edit config.php
+3. Run `php -S localhost`
+4. Now you can use the REST API
+5. GET /todo will list all TODOS in your database
+6. POST /todo will create a new TODO
+7. PUT /todo/index/:id will update your TODO
+8. DELETE /todo/index/:id will delete your TODO
+9. Be Happy!, Be Curious!
+
+:warning: REMEMBER in POST and PUT the body need be a JSON
+
 ## License
 
     Copyright 2015 Augusto Monteiro
