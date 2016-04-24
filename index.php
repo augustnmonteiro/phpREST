@@ -2,9 +2,9 @@
 
 include 'config.php';
 
-define('CONTROLLERS', 'controllers/');
-define('HELPERS', 'helpers/');
-define('CORE', 'core/');
+define('CONTROLLERS', 'controllers');
+define('HELPERS', 'helpers');
+define('CORE', 'core');
 
 function __autoload($name)
 {
@@ -14,16 +14,14 @@ function __autoload($name)
         CORE . '/' . $name . '.php'
     );
 
-    $result = array_filter($paths, function ($file) {
+    foreach ($paths as $file) {
         if (file_exists($file)) {
             require_once $file;
             return true;
         }
+    }
 
-        return false;
-    });
-
-    return $result;
+    return false;
 }
 
 $url = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
