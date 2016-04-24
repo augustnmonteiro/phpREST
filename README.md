@@ -22,7 +22,14 @@ DEFAULT CHARACTER SET = utf8;
 ```
 2. Edit config.php
 3. Run `php -S localhost`
-4. Be Happy :smile: 
+4. Now you can use the REST API
+5. GET /todo will list all TODOS in your database
+6. POST /todo will create a new TODO
+7. PUT /todo/index/:id will update your TODO
+8. DELETE /todo/index/:id will delete your TODO
+9. Be Happy!, Be Curious!
+
+:warning: REMEMBER in POST and PUT the body need be a JSON
 
 ## License
 
