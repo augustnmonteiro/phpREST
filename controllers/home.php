@@ -17,7 +17,6 @@ class home extends Controller
     {
         echo "DELETE";
     }
-
 }
 
 ?>

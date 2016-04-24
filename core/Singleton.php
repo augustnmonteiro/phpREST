@@ -1,18 +1,36 @@
-<?php 
+<?php
 
-class Singleton {
-    public static function Auth(){
-      return new Auth();
+class Singleton
+{
+
+    private $auth, $model, $error;
+
+    public static function Auth()
+    {
+        if (empty($auth)) {
+            $auth = new Auth();
+        }
+
+        return $auth;
     }
 
-    public static function Model(){
-      return new Model();
+    public static function Model()
+    {
+        if (empty($model)) {
+            $model = new Model();
+        }
+
+        return $model;
     }
 
-    public static function Error(){
-        return new Error();
-    }
+    public static function Error()
+    {
+        if (empty($error)) {
+            $error = new Error();
+        }
 
+        return $error;
+    }
 }
 
 ?>
