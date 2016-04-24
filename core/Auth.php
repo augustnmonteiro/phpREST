@@ -6,9 +6,12 @@ class Auth
     function isAuthenticated()
     {
         if (isset($_SESSION['user_id'])) {
+
             return $_SESSION['user_id'];
         } else {
+
             http_response_code(403);
+
             exit;
         }
     }
@@ -22,7 +25,6 @@ class Auth
     {
         unset($_SESSION['user_id']);
     }
-
 }
 
 ?>

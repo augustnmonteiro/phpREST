@@ -1,9 +1,12 @@
 <?php
 
-class Controller {
+class Controller
+{
 
-    function isAuthenticated(){
+    function isAuthenticated()
+    {
         Singleton::Auth()->isAuthenticated();
     }
-
 }
+
+?>

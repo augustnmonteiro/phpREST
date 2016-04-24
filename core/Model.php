@@ -2,14 +2,15 @@
 
 class Model
 {
+
     public $mysql;
 
     function __construct()
     {
-        $this->mysql = new Mysqli('p:'.DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $this->mysql = new Mysqli('p:' . DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
         if ($this->mysql->connect_errno) {
-            Singleton::Error()->show(412, 'Database Connection | '.$this->mysql->connect_error);
+            Singleton::Error()->show(412, 'Database Connection | ' . $this->mysql->connect_error);
         }
     }
 
@@ -19,17 +20,17 @@ class Model
         if ($sql) {
             return $sql->fetch_all(MYSQL_ASSOC);
         }
-        Singleton::Error()->show(412, 'Fetch All | '.$this->mysql->error);
+        Singleton::Error()->show(412, 'Fetch All | ' . $this->mysql->error);
         return false;
     }
 
     function fetch_all_paginated($query)
     {
-        $sql = $this->mysql->query($query.' LIMIT '.Pagination::paginate());
+        $sql = $this->mysql->query($query . ' LIMIT ' . Pagination::paginate());
         if ($sql) {
             return $sql->fetch_all(MYSQL_ASSOC);
         }
-        Singleton::Error()->show(412, 'Fetch All | '.$this->mysql->error);
+        Singleton::Error()->show(412, 'Fetch All | ' . $this->mysql->error);
         return false;
     }
 
@@ -39,17 +40,17 @@ class Model
         if ($sql) {
             return $sql->fetch_all(MYSQL_ASSOC);
         }
-        Singleton::Error()->show(412, 'Query | '.$this->mysql->error);
+        Singleton::Error()->show(412, 'Query | ' . $this->mysql->error);
         return false;
     }
 
     function query_paginated($query)
     {
-        $sql = $this->mysql->query($query.' LIMIT '.Pagination::paginate());
+        $sql = $this->mysql->query($query . ' LIMIT ' . Pagination::paginate());
         if ($sql) {
             return $sql->fetch_all(MYSQL_ASSOC);
         }
-        Singleton::Error()->show(412, 'Query Paginated | '.$this->mysql->error);
+        Singleton::Error()->show(412, 'Query Paginated | ' . $this->mysql->error);
     }
 
     function insert($query)
@@ -57,7 +58,7 @@ class Model
         if ($this->mysql->query($query)) {
             return true;
         }
-        Singleton::Error()->show(412, 'Insert | '.$this->mysql->error);
+        Singleton::Error()->show(412, 'Insert | ' . $this->mysql->error);
         return false;
     }
 
@@ -66,7 +67,7 @@ class Model
         if ($this->mysql->query($query)) {
             return true;
         }
-        Singleton::Error()->show(412, 'Delete | '.$this->mysql->error);
+        Singleton::Error()->show(412, 'Delete | ' . $this->mysql->error);
         return false;
     }
 
@@ -75,8 +76,9 @@ class Model
         if ($this->mysql->query($query)) {
             return true;
         }
-        Singleton::Error()->show(412, 'Update | '.$this->mysql->error);
+        Singleton::Error()->show(412, 'Update | ' . $this->mysql->error);
         return false;
     }
-
 }
+
+?>
