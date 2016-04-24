@@ -45,7 +45,7 @@ if (class_exists($controller)) {
 
     if (method_exists($class, $action)) {
 
-        echo json_encode($class->$action(array_slice($url, 3)));
+        echo json_encode($class->$action(array_slice($url, 3), Singleton::Parser()->getValues()));
     } else {
 
         http_response_code(412);

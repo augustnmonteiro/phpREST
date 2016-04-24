@@ -3,7 +3,7 @@
 class Singleton
 {
 
-    private static $auth, $model, $error;
+    private static $auth, $model, $error, $parser;
 
     public static function Auth()
     {
@@ -30,6 +30,15 @@ class Singleton
         }
 
         return static::$error;
+    }
+
+    public static function Parser()
+    {
+        if (static::$parser === null) {
+            static::$parser = new Parser();
+        }
+
+        return static::$parser;
     }
 }
 

@@ -14,24 +14,32 @@ class Model
         }
     }
 
-    function fetch_all($query)
+    function getProjection($projection)
     {
-        $sql = $this->mysql->query($query);
-        if ($sql) {
-            return $sql->fetch_all(MYSQL_ASSOC);
+        if (!isset($projection) || $projection == '') {
+            $projection = '*';
+        } else {
+            $projection = implode(',', $projection);
         }
-        Singleton::Error()->show(412, 'Fetch All | ' . $this->mysql->error);
-        return false;
+        return $projection;
     }
 
-    function fetch_all_paginated($query)
+    function fetch_all($table, $projection)
     {
-        $sql = $this->mysql->query($query . ' LIMIT ' . Pagination::paginate());
-        if ($sql) {
-            return $sql->fetch_all(MYSQL_ASSOC);
-        }
-        Singleton::Error()->show(412, 'Fetch All | ' . $this->mysql->error);
-        return false;
+        $projection = $this->getProjection($projection);
+        return $this->query("SELECT $projection FROM $table");
+    }
+
+    function fetch_all_paginated($table, $projection)
+    {
+        $projection = $this->getProjection($projection);
+        return $this->query_paginated("SELECT $projection FROM $table");
+    }
+
+    function getById($table, $id, $projection)
+    {
+        $projection = $this->getProjection($projection);
+        return $this->query("SELECT $projection FROM $table WHERE id='$id'");
     }
 
     function query($query)
@@ -53,8 +61,13 @@ class Model
         Singleton::Error()->show(412, 'Query Paginated | ' . $this->mysql->error);
     }
 
-    function insert($query)
+    function insert($table, $values)
     {
+        $query = 'INSERT INTO ' . $table;
+        $query .= ' (' . implode(',', array_keys((array)$values)) . ')';
+        $query .= ' VALUES ';
+        $query .= "('" . implode("','", array_values((array)$values)) . "')";
+
         if ($this->mysql->query($query)) {
             return true;
         }
@@ -71,8 +84,39 @@ class Model
         return false;
     }
 
+    function deleteById($table, $id)
+    {
+        $query = "DELETE FROM $table WHERE id='$id'";
+        if ($this->mysql->query($query)) {
+            return true;
+        }
+        Singleton::Error()->show(412, 'Delete By Id | ' . $this->mysql->error);
+        return false;
+    }
+
     function update($query)
     {
+        if ($this->mysql->query($query)) {
+            return true;
+        }
+        Singleton::Error()->show(412, 'Update | ' . $this->mysql->error);
+        return false;
+    }
+
+    function valuesToUpdate($values)
+    {
+        $set = [];
+        foreach ($values as $key => $value) {
+            array_push($set, "$key='$value'");
+        }
+        return implode(',', $set);
+    }
+
+    function updateById($table, $id, $values)
+    {
+        $query = "UPDATE $table SET ";
+        $query .= $this->valuesToUpdate($values);
+        $query .= " WHERE id='$id'";
         if ($this->mysql->query($query)) {
             return true;
         }
