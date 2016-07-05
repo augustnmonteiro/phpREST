@@ -5,7 +5,10 @@ class home extends Controller
 
     function get_index()
     {
-        return Singleton::Model()->query("SELECT * FROM users");
+        return (object) [
+            "message" => "Welcome :D",
+            "description" => "Simple and Fast rest framework"
+        ];
     }
 
     function post_index()

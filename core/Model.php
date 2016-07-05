@@ -41,7 +41,7 @@ class Model
         $projection = $this->getProjection($projection);
         $sql = $this->mysql->query("SELECT $projection FROM $table WHERE id='$id' LIMIT 1");
         if ($sql) {
-            $result = $sql->fetch_all(MYSQL_ASSOC);
+            $result = $sql->fetch_all(MYSQLI_ASSOC);
             if (count($result) > 0) {
                 return $result[0];
             } else {
@@ -56,7 +56,7 @@ class Model
     {
         $sql = $this->mysql->query($query);
         if ($sql) {
-            return $sql->fetch_all(MYSQL_ASSOC);
+            return $sql->fetch_all(MYSQLI_ASSOC);
         }
         Singleton::Error()->show(412, 'Query | ' . $this->mysql->error);
         return false;
@@ -66,7 +66,7 @@ class Model
     {
         $sql = $this->mysql->query($query . ' LIMIT ' . Pagination::paginate());
         if ($sql) {
-            return $sql->fetch_all(MYSQL_ASSOC);
+            return $sql->fetch_all(MYSQLI_ASSOC);
         }
         Singleton::Error()->show(412, 'Query Paginated | ' . $this->mysql->error);
     }

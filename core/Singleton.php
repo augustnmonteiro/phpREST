@@ -26,7 +26,7 @@ class Singleton
     public static function Error()
     {
         if (static::$error === null) {
-            static::$error = new Error();
+            static::$error = new _Error();
         }
 
         return static::$error;

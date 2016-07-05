@@ -5,13 +5,15 @@ include 'config.php';
 define('CONTROLLERS', 'controllers');
 define('HELPERS', 'helpers');
 define('CORE', 'core');
+define('GENERICS', 'generics');
 
 function __autoload($name)
 {
     $paths = array(
         CONTROLLERS . '/' . $name . '.php',
         HELPERS . '/' . $name . '.php',
-        CORE . '/' . $name . '.php'
+        CORE . '/' . $name . '.php',
+        GENERICS . '/' . $name . '.php'
     );
 
     foreach ($paths as $file) {

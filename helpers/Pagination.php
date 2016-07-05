@@ -6,8 +6,8 @@ class Pagination
     static function paginate()
     {
 
-        $start = $_GET['start'];
-        $limit = $_GET['limit'];
+        $start = @$_GET['start'];
+        $limit = @$_GET['limit'];
 
         if (!isset($start) || $start == '') {
             $start = 0;
