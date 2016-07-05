@@ -18,7 +18,7 @@ AUTO_INCREMENT = 8
 DEFAULT CHARACTER SET = utf8;
 ```
 2. Edit config.php
-3. Run `php -S localhost`
+3. Run `php -S localhost:3000`
 4. Now you can use the REST API
 5. GET /todo will list all TODOS in your database
 6. POST /todo will create a new TODO
