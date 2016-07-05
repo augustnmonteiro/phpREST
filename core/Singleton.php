@@ -3,7 +3,7 @@
 class Singleton
 {
 
-    private static $auth, $model, $error, $parser;
+    private static $auth, $model, $message, $parser;
 
     public static function Auth()
     {
@@ -23,13 +23,13 @@ class Singleton
         return static::$model;
     }
 
-    public static function Error()
+    public static function Message()
     {
-        if (static::$error === null) {
-            static::$error = new _Error();
+        if (static::$message === null) {
+            static::$message = new Message();
         }
 
-        return static::$error;
+        return static::$message;
     }
 
     public static function Parser()

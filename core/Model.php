@@ -10,7 +10,7 @@ class Model
         $this->mysql = new Mysqli('p:' . DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
         if ($this->mysql->connect_errno) {
-            Singleton::Error()->show(412, 'Database Connection | ' . $this->mysql->connect_error);
+            Singleton::Message()->error(412, 'Database Connection | ' . $this->mysql->connect_error);
         }
     }
 
@@ -48,7 +48,7 @@ class Model
                 return (object) [];
             }
         }
-        Singleton::Error()->show(412, 'getById | ' . $this->mysql->error);
+        Singleton::Message()->error(412, 'getById | ' . $this->mysql->error);
         return false;
     }
 
@@ -58,7 +58,7 @@ class Model
         if ($sql) {
             return $sql->fetch_all(MYSQLI_ASSOC);
         }
-        Singleton::Error()->show(412, 'Query | ' . $this->mysql->error);
+        Singleton::Message()->error(412, 'Query | ' . $this->mysql->error);
         return false;
     }
 
@@ -68,7 +68,7 @@ class Model
         if ($sql) {
             return $sql->fetch_all(MYSQLI_ASSOC);
         }
-        Singleton::Error()->show(412, 'Query Paginated | ' . $this->mysql->error);
+        Singleton::Message()->error(412, 'Query Paginated | ' . $this->mysql->error);
     }
 
     function insert($table, $values)
@@ -79,18 +79,18 @@ class Model
         $query .= "('" . implode("','", array_values((array)$values)) . "')";
 
         if ($this->mysql->query($query)) {
-            return true;
+            Singleton::Message()->success(201, 'Created');
         }
-        Singleton::Error()->show(412, 'Insert | ' . $this->mysql->error);
+        Singleton::Message()->error(412, 'Insert | ' . $this->mysql->error);
         return false;
     }
 
     function delete($query)
     {
         if ($this->mysql->query($query)) {
-            return true;
+            Singleton::Message()->success(200, 'Deleted');
         }
-        Singleton::Error()->show(412, 'Delete | ' . $this->mysql->error);
+        Singleton::Message()->error(412, 'Delete | ' . $this->mysql->error);
         return false;
     }
 
@@ -98,18 +98,18 @@ class Model
     {
         $query = "DELETE FROM $table WHERE id='$id'";
         if ($this->mysql->query($query)) {
-            return true;
+            Singleton::Message()->success(200, 'Deleted');
         }
-        Singleton::Error()->show(412, 'Delete By Id | ' . $this->mysql->error);
+        Singleton::Message()->error(412, 'Delete By Id | ' . $this->mysql->error);
         return false;
     }
 
     function update($query)
     {
         if ($this->mysql->query($query)) {
-            return true;
+            Singleton::Message()->success(200, 'Updated');
         }
-        Singleton::Error()->show(412, 'Update | ' . $this->mysql->error);
+        Singleton::Message()->error(412, 'Update | ' . $this->mysql->error);
         return false;
     }
 
@@ -128,9 +128,9 @@ class Model
         $query .= $this->valuesToUpdate($values);
         $query .= " WHERE id='$id'";
         if ($this->mysql->query($query)) {
-            return true;
+            Singleton::Message()->success(200, 'Updated');
         }
-        Singleton::Error()->show(412, 'Update | ' . $this->mysql->error);
+        Singleton::Message()->error(412, 'Update | ' . $this->mysql->error);
         return false;
     }
 }
