@@ -36,7 +36,7 @@ class MysqlHelper
         return $this->query_paginated("SELECT $projection FROM $table");
     }
 
-    function getById($table, $id, $projection)
+    function getById($table, $id, $projection = null)
     {
         $projection = $this->getProjection($projection);
         $sql = $this->mysql->query("SELECT $projection FROM $table WHERE id='$id' LIMIT 1");
