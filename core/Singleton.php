@@ -3,7 +3,7 @@
 class Singleton
 {
 
-    private static $auth, $mysqlHelper, $message, $parser;
+    private static $auth, $mysqlHelper, $redisHelper, $message, $parser;
 
     public static function Auth()
     {
@@ -21,6 +21,15 @@ class Singleton
         }
 
         return static::$mysqlHelper;
+    }
+
+    public static function RedisHelper()
+    {
+        if (static::$redisHelper === null) {
+            static::$redisHelper = new RedisHelper();
+        }
+
+        return static::$redisHelper;
     }
 
     public static function Message()
