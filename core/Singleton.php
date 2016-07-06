@@ -3,7 +3,7 @@
 class Singleton
 {
 
-    private static $auth, $model, $message, $parser;
+    private static $auth, $mysqlHelper, $message, $parser;
 
     public static function Auth()
     {
@@ -14,13 +14,13 @@ class Singleton
         return static::$auth;
     }
 
-    public static function Model()
+    public static function MysqlHelper()
     {
-        if (static::$model === null) {
-            static::$model = new Model();
+        if (static::$mysqlHelper === null) {
+            static::$mysqlHelper = new MysqlHelper();
         }
 
-        return static::$model;
+        return static::$mysqlHelper;
     }
 
     public static function Message()

@@ -11,17 +11,17 @@ class GenericCRUD extends Controller
 
     function post_index($args, $values)
     {
-        return Singleton::Model()->insert($this::$entity, $values);
+        return Singleton::MysqlHelper()->insert($this::$entity, $values);
     }
 
     function put_index($args, $values)
     {
-        return Singleton::Model()->updateById($this::$entity, $args[0], $values);
+        return Singleton::MysqlHelper()->updateById($this::$entity, $args[0], $values);
     }
 
     function delete_index($args)
     {
-        return Singleton::Model()->deleteById($this::$entity, $args[0]);
+        return Singleton::MysqlHelper()->deleteById($this::$entity, $args[0]);
     }
 
 }
