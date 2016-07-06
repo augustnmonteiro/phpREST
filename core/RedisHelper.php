@@ -8,7 +8,7 @@ class RedisHelper
     function __construct()
     {
         $this->redis = new Redis();
-        $this->redis->connect("localhost", 6379);
+        $this->redis->pconnect("localhost", 6379);
     }
 
     function set($key, $value, $expire = null) {
